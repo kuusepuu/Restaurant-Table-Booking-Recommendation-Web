@@ -1,0 +1,159 @@
+.floor-plan-container {
+  padding: 20px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.06);
+}
+
+.recommendation-hint {
+  margin-bottom: 14px;
+  padding: 10px 16px;
+  background: #fffde7;
+  border: 1px solid #ffe082;
+  border-left: 4px solid #ffc107;
+  border-radius: 6px;
+  font-size: 13px;
+  color: #b45309;
+  font-weight: 500;
+  letter-spacing: 0.1px;
+}
+
+.legend {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 16px;
+  padding: 10px 14px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  flex-wrap: wrap;
+  border: 1px solid #e9ecef;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12.5px;
+  color: #495057;
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: white;
+  border: 1px solid #e9ecef;
+  font-weight: 500;
+}
+
+.color-box {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+.color-box.available    { background-color: #22c55e; }
+.color-box.occupied     { background-color: #ef4444; }
+.color-box.recommended  { background-color: #f59e0b; }
+.color-box.too-small    { background-color: #9ca3af; }
+
+.floor-plan {
+  width: 100%;
+  max-width: 1400px;
+  height: auto;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  background: #fdfdfe;
+  display: block;
+}
+
+.zone-label {
+  font-size: 10.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  pointer-events: none;
+  dominant-baseline: middle;
+}
+
+/* Table group */
+.table {
+  cursor: pointer;
+  transition: filter 0.15s, transform 0.1s;
+}
+
+.table:hover:not(.occupied):not(.too-small) {
+  filter: brightness(1.1) drop-shadow(0 4px 8px rgba(0,0,0,0.25));
+}
+
+/* Table rect base (available = green) */
+.table-shape {
+  fill: #22c55e;
+  stroke: #16a34a;
+  stroke-width: 1.5;
+  transition: fill 0.2s, stroke 0.2s;
+}
+
+.table.occupied .table-shape {
+  fill: #ef4444;
+  stroke: #dc2626;
+  cursor: not-allowed;
+}
+
+.table.recommended .table-shape {
+  fill: #f59e0b;
+  stroke: #d97706;
+  stroke-width: 2.5;
+}
+
+.table.too-small .table-shape {
+  fill: #9ca3af;
+  stroke: #6b7280;
+  cursor: not-allowed;
+  opacity: 0.75;
+}
+
+/* Text inside table */
+.table-label {
+  font-size: 13px;
+  font-weight: 700;
+  fill: white;
+  pointer-events: none;
+  dominant-baseline: middle;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+
+.capacity {
+  font-size: 11px;
+  fill: rgba(255, 255, 255, 0.92);
+  pointer-events: none;
+  dominant-baseline: middle;
+}
+
+.accessible-icon {
+  font-size: 10px;
+  fill: white;
+  pointer-events: none;
+  opacity: 0.9;
+}
+
+/* Score badge */
+.score-badge circle {
+  fill: #1d4ed8;
+  stroke: white;
+  stroke-width: 1.5;
+}
+
+.score-text {
+  font-size: 10px;
+  font-weight: 700;
+  fill: white;
+  pointer-events: none;
+  dominant-baseline: middle;
+}
+
+.loading-placeholder {
+  padding: 48px;
+  text-align: center;
+  color: #9ca3af;
+  font-style: italic;
+  font-size: 14px;
+}
+

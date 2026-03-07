@@ -1,0 +1,143 @@
+<div class="floor-plan-container">
+  <!-- Legend -->
+  <div class="legend">
+    <div class="legend-item">
+      <span class="color-box available"></span>
+      <span>Available</span>
+    </div>
+    <div class="legend-item">
+      <span class="color-box occupied"></span>
+      <span>Occupied</span>
+    </div>
+    <div class="legend-item">
+      <span class="color-box recommended"></span>
+      <span>Recommended</span>
+    </div>
+    <div class="legend-item">
+      <span class="color-box too-small"></span>
+      <span>Too Small</span>
+    </div>
+  </div>
+
+  <!-- Recommendation hint -->
+  @if (recommendations.length > 0) {
+    <div class="recommendation-hint">
+      🌟 {{ recommendations.length }} table{{ recommendations.length !== 1 ? 's' : '' }} recommended — click a gold table to book it
+    </div>
+  }
+
+  <!-- SVG Floor Plan -->
+  <svg [attr.viewBox]="'0 0 ' + gridWidth + ' ' + gridHeightWithOffsets"
+       class="floor-plan"
+       preserveAspectRatio="xMidYMid meet">
+
+    <defs>
+      <filter id="table-shadow" x="-20%" y="-20%" width="140%" height="140%">
+        <feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="rgba(0,0,0,0.20)" />
+      </filter>
+    </defs>
+
+    <!-- Zone background rectangles -->
+    @for (zone of zones; track zone) {
+      <!-- Zone body -->
+      <rect
+        [attr.x]="getZoneBounds(zone).x"
+        [attr.y]="getZoneBounds(zone).y"
+        [attr.width]="getZoneBounds(zone).width"
+        [attr.height]="getZoneBounds(zone).height"
+        [attr.fill]="getZoneColor(zone)"
+        [attr.stroke]="getZoneStroke(zone)"
+        stroke-width="1.5"
+        rx="10"
+        opacity="0.7" />
+      <!-- Zone label header strip -->
+      <rect
+        [attr.x]="getZoneBounds(zone).x"
+        [attr.y]="getZoneBounds(zone).y"
+        [attr.width]="getZoneBounds(zone).width"
+        [attr.height]="zoneLabelHeight"
+        [attr.fill]="getZoneStroke(zone)"
+        rx="10"
+        opacity="0.5"
+        pointer-events="none" />
+      <!-- Clip bottom corners of header strip (so only top has rounding) -->
+      <rect
+        [attr.x]="getZoneBounds(zone).x"
+        [attr.y]="getZoneBounds(zone).y + 6"
+        [attr.width]="getZoneBounds(zone).width"
+        [attr.height]="zoneLabelHeight - 6"
+        [attr.fill]="getZoneStroke(zone)"
+        opacity="0.5"
+        pointer-events="none" />
+      <text class="zone-label"
+            [attr.x]="getZoneLabelX(zone)"
+            [attr.y]="getZoneLabelY(zone)"
+            [attr.fill]="getZoneLabelColor(zone)">
+        {{ formatZone(zone) }}
+      </text>
+    }
+
+    <!-- Tables -->
+    @for (table of tables; track table.id) {
+      <g class="table"
+         [class.occupied]="isOccupied(table)"
+         [class.recommended]="isRecommended(table) && !isOccupied(table)"
+         [class.too-small]="isTooSmall(table) && !isOccupied(table)"
+         [attr.transform]="'translate(' + tableX(table) + ',' + tableY(table) + ')'"
+         (click)="selectTable(table)">
+
+        <!-- Table shape -->
+        <rect class="table-shape"
+              [attr.width]="cellSize - 12"
+              [attr.height]="cellSize - 12"
+              rx="10"
+              filter="url(#table-shadow)" />
+
+        <!-- Table label -->
+        <text class="table-label"
+              [attr.x]="(cellSize - 12) / 2"
+              [attr.y]="(cellSize - 12) / 2 - 7"
+              text-anchor="middle">
+          {{ table.label }}
+        </text>
+
+        <!-- Capacity -->
+        <text class="capacity"
+              [attr.x]="(cellSize - 12) / 2"
+              [attr.y]="(cellSize - 12) / 2 + 10"
+              text-anchor="middle">
+          {{ table.capacity }}p
+        </text>
+
+        <!-- Accessibility icon -->
+        @if (table.accessible) {
+          <text class="accessible-icon"
+                [attr.x]="(cellSize - 12) - 14"
+                [attr.y]="18"
+                text-anchor="middle">♿</text>
+        }
+
+        <!-- Score badge for recommended tables -->
+        @if (getScore(table) > 0 && !isOccupied(table)) {
+          <g class="score-badge">
+            <circle r="12"
+                    [attr.cx]="(cellSize - 12) - 14"
+                    [attr.cy]="(cellSize - 12) - 14" />
+            <text [attr.x]="(cellSize - 12) - 14"
+                  [attr.y]="(cellSize - 12) - 14"
+                  text-anchor="middle"
+                  dominant-baseline="central"
+                  class="score-text">
+              {{ getScore(table) }}
+            </text>
+          </g>
+        }
+      </g>
+    }
+  </svg>
+
+  @if (tables.length === 0) {
+    <div class="loading-placeholder">Loading floor plan…</div>
+  }
+</div>
+

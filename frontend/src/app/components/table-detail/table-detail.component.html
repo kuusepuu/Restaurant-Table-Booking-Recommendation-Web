@@ -1,0 +1,81 @@
+@if (table) {
+  <div class="table-detail">
+    <div class="detail-header">
+      <h3>Table {{ table.label }}</h3>
+      <button class="close-btn" (click)="onClose()">×</button>
+    </div>
+
+    <div class="detail-content">
+      <div class="info-row">
+        <span class="label">Capacity:</span>
+        <span class="value">{{ table.capacity }} people</span>
+      </div>
+
+      <div class="info-row">
+        <span class="label">Zone:</span>
+        <span class="value">{{ formatZone(table.zone) }}</span>
+      </div>
+
+      @if (table.accessible) {
+        <div class="info-row">
+          <span class="label">Accessibility:</span>
+          <span class="value">♿ Wheelchair accessible</span>
+        </div>
+      }
+
+      <!-- Score breakdown if from recommendation -->
+      @if (recommendation) {
+        <div class="recommendation-info">
+          <div class="score-display">
+            <span class="score-label">Match Score:</span>
+            <span class="score-value">{{ recommendation.score }}/100</span>
+          </div>
+
+          @if (recommendation.reasons.length > 0) {
+            <div class="reasons">
+              @for (reason of recommendation.reasons; track reason) {
+                <div class="reason">✓ {{ reason }}</div>
+              }
+            </div>
+          }
+        </div>
+      }
+
+      <!-- Booking Section -->
+      @if (!showBookingForm) {
+        <div class="booking-section">
+          <button class="book-btn" (click)="showBookingForm = true">
+            Book This Table
+          </button>
+        </div>
+      }
+
+      @if (showBookingForm) {
+        <form [formGroup]="bookingForm" (ngSubmit)="onBook()">
+          <div class="form-group">
+            <label for="customerName">Your Name</label>
+            <input type="text" id="customerName" formControlName="customerName"
+                   placeholder="Enter your name">
+          </div>
+
+          <div class="booking-summary">
+            <small>
+              {{ selectedDate }} at {{ selectedTime }} for {{ groupSize }} people
+              ({{ durationMinutes }} min)
+            </small>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="cancel-btn" (click)="showBookingForm = false">
+              Cancel
+            </button>
+            <button type="submit" [disabled]="!bookingForm.valid" class="confirm-btn">
+              Confirm Booking
+            </button>
+          </div>
+        </form>
+      }
+    </div>
+  </div>
+}
+

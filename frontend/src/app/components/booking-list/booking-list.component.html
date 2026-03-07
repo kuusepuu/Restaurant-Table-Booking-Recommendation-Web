@@ -1,0 +1,39 @@
+<div class="booking-list">
+  <h3>Bookings for {{ selectedDate }}</h3>
+
+  @if (bookings.length > 0) {
+    <div class="bookings-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Time</th>
+            <th>Table</th>
+            <th>Customer</th>
+            <th>Group</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (booking of bookings; track booking.id) {
+            <tr>
+              <td>{{ formatTime(booking.startTime) }} – {{ formatTime(booking.endTime) }}</td>
+              <td>{{ booking.table.label }}</td>
+              <td>{{ booking.customerName }}</td>
+              <td>{{ booking.groupSize }}</td>
+              <td>
+                <button class="cancel-btn" (click)="onCancel(booking.id)">
+                  Cancel
+                </button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  } @else {
+    <div class="no-bookings">
+      <p>No bookings for this date.</p>
+    </div>
+  }
+</div>
+
