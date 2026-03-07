@@ -1,0 +1,100 @@
+### IntelliJ IDEA ###
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
+.kotlin
+
+### Eclipse ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+bin/
+!**/src/main/**/bin/
+!**/src/test/**/bin/
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+### VS Code ###
+.vscode/
+
+### Mac OS ###
+.DS_Store
+
+### Java ###
+*.class
+*.jar
+*.war
+*.ear
+*.log
+*.jvmargs
+
+### Maven ###
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+### Node.js / Angular ###
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+### Angular ###
+frontend/dist/
+frontend/.angular/
+frontend/.sass-cache/
+frontend/connect.lock
+frontend/coverage/
+frontend/libpeerconnection.log
+testem.log
+/typings
+*.tsbuildinfo
+
+### H2 Database ###
+*.h2.db
+*.mv.db
+*.trace.db
+
+### Application ###
+*.properties.local
+*.properties.dev
+application-local.properties
+application-dev.properties
+.env
+.env.local
+.env.*.local
+
+### Logs ###
+logs/
+*.log
+
+### Temporary files ###
+*.tmp
+*.temp
+*.swp
+*~
+
+### OS files ###
+Thumbs.db
