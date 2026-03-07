@@ -77,6 +77,11 @@ testem.log
 *.mv.db
 *.trace.db
 
+### SQLite Database ###
+*.db
+*.db-shm
+*.db-wal
+
 ### Application ###
 *.properties.local
 *.properties.dev
