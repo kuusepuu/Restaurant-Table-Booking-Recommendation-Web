@@ -73,7 +73,14 @@ A full-stack web application that lets restaurant visitors browse a visual floor
 | Node.js     | 20+             |
 | npm         | 11+             |
 
-### 1 — Start the backend
+Copy the repository and navigate to the project root:
+
+```bash
+git clone https://github.com/kuusepuu/Restaurant-Table-Booking-Recommendation-Web.git
+cd Restaurant-Table-Booking-Recommendation-Web
+````
+
+### 1 — Start the backend (1 terminal)
 
 ```bash
 cd backend
@@ -85,7 +92,7 @@ On first startup the database is seeded automatically: 17 tables are created and
 
 > **Windows users:** use `mvnw.cmd spring-boot:run`
 
-### 2 — Start the frontend
+### 2 — Start the frontend (2-nd terminal)
 
 ```bash
 cd frontend
