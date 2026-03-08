@@ -90,7 +90,7 @@ cd backend
 The API starts on **http://localhost:8080**.  
 On first startup the database is seeded automatically: 17 tables are created and random bookings are scattered across today's and tomorrow's schedules.
 
-> **Windows users:** use `mvnw.cmd spring-boot:run`
+> **Windows users:** use `.\mvnw.cmd spring-boot:run`
 
 ### 2 — Start the frontend (2-nd terminal)
 
