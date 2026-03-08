@@ -1,6 +1,6 @@
 package com.restaurant.backend.service;
 
-import com.restaurant.backend.model.RestaurantTable;
+import com.restaurant.backend.Entity.RestaurantTable;
 import com.restaurant.backend.repository.BookingRepository;
 import com.restaurant.backend.repository.TableRepository;
 import lombok.RequiredArgsConstructor;

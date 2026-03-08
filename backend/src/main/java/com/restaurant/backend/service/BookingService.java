@@ -2,8 +2,8 @@ package com.restaurant.backend.service;
 
 import com.restaurant.backend.dto.BookingRequest;
 import com.restaurant.backend.dto.BookingResponse;
-import com.restaurant.backend.model.Booking;
-import com.restaurant.backend.model.RestaurantTable;
+import com.restaurant.backend.Entity.Booking;
+import com.restaurant.backend.Entity.RestaurantTable;
 import com.restaurant.backend.repository.BookingRepository;
 import com.restaurant.backend.repository.TableRepository;
 import lombok.RequiredArgsConstructor;
@@ -12,10 +12,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -39,6 +38,13 @@ public class BookingService {
      * - table is not already booked for the requested time slot
      */
     public BookingResponse createBooking(BookingRequest request) {
+        // 0. Reject bookings in the past
+        LocalDateTime requestedDateTime = LocalDateTime.of(request.date(), request.startTime());
+        if (requestedDateTime.isBefore(LocalDateTime.now())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    "Cannot create a booking in the past");
+        }
+
         // 1. Validate table exists
         RestaurantTable table = tableRepository.findById(request.tableId())
                 .orElseThrow(() -> new ResponseStatusException(

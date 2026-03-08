@@ -48,6 +48,8 @@
         [recommendations]="recommendations()"
         [bookings]="bookings()"
         [selectedGroupSize]="currentCriteria().groupSize"
+        [searchStartTime]="currentCriteria().startTime"
+        [searchDurationMinutes]="currentCriteria().durationMinutes"
         (tableSelected)="onTableSelected($event)">
       </app-floor-plan>
       <app-booking-list

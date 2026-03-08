@@ -1,8 +1,8 @@
 package com.restaurant.backend.config;
 
-import com.restaurant.backend.model.Booking;
-import com.restaurant.backend.model.RestaurantTable;
-import com.restaurant.backend.model.Zone;
+import com.restaurant.backend.Entity.Booking;
+import com.restaurant.backend.Entity.RestaurantTable;
+import com.restaurant.backend.Entity.Zone;
 import com.restaurant.backend.repository.BookingRepository;
 import com.restaurant.backend.repository.TableRepository;
 import lombok.RequiredArgsConstructor;
@@ -46,9 +46,9 @@ public class DataSeeder implements CommandLineRunner {
     // Table layout
     // -------------------------------------------------------------------------
     //  MAIN HALL  (rows 0-1, cols 0-2)  — 6 tables
-    //  WINDOW     (rows 0-1, col 3)     — 3 tables
-    //  PRIVATE    (row 2, cols 0-1)     — 2 tables
-    //  PATIO      (row 3, cols 0-3)     — 4 tables
+    //  WINDOW     (rows 0-1, cols 3-4)  — 4 tables
+    //  PRIVATE    (row 3, cols 0-2)     — 3 tables
+    //  PATIO      (row 5, cols 0-3)     — 4 tables
     // -------------------------------------------------------------------------
 
     private List<RestaurantTable> seedTables() {

@@ -1,4 +1,4 @@
-package com.restaurant.backend.model;
+package com.restaurant.backend.Entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

@@ -5,7 +5,7 @@
     <!-- Date -->
     <div class="form-group">
       <label for="date">Date</label>
-      <input type="date" id="date" formControlName="date">
+      <input type="date" id="date" formControlName="date" [min]="today">
     </div>
 
     <!-- Time -->
@@ -57,7 +57,11 @@
       </label>
     </div>
 
-    <button type="submit" [disabled]="!searchForm.valid" class="search-btn">
+    @if (isInPast) {
+      <div class="past-time-error">⚠️ Cannot search for a time in the past.</div>
+    }
+
+    <button type="submit" [disabled]="!searchForm.valid || isInPast" class="search-btn">
       Find Tables
     </button>
   </form>

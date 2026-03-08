@@ -2,9 +2,9 @@ package com.restaurant.backend.service;
 
 import com.restaurant.backend.dto.SearchCriteria;
 import com.restaurant.backend.dto.TableRecommendation;
-import com.restaurant.backend.model.Booking;
-import com.restaurant.backend.model.RestaurantTable;
-import com.restaurant.backend.model.Zone;
+import com.restaurant.backend.Entity.Booking;
+import com.restaurant.backend.Entity.RestaurantTable;
+import com.restaurant.backend.Entity.Zone;
 import com.restaurant.backend.repository.BookingRepository;
 import com.restaurant.backend.repository.TableRepository;
 import org.junit.jupiter.api.BeforeEach;

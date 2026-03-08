@@ -16,6 +16,10 @@ export class FloorPlanComponent {
   @Input() recommendations: TableRecommendation[] = [];
   @Input() bookings: Booking[] = [];
   @Input() selectedGroupSize: number = 2;
+  /** Current search start time in "HH:mm" format — used for overlap checking */
+  @Input() searchStartTime: string = '';
+  /** Current search duration in minutes — used for overlap checking */
+  @Input() searchDurationMinutes: number = 120;
 
   // Output: events to parent component
   @Output() tableSelected = new EventEmitter<RestaurantTable>();
@@ -40,7 +44,25 @@ export class FloorPlanComponent {
 
   // Check table status
   isOccupied(table: RestaurantTable): boolean {
-    return this.bookings.some(b => b.table.id === table.id);
+    if (!this.searchStartTime) {
+      // No search performed yet — show any booking on that date as occupied
+      return this.bookings.some(b => b.table.id === table.id);
+    }
+
+    // Parse search window into total minutes since midnight for comparison
+    const [sh, sm] = this.searchStartTime.split(':').map(Number);
+    const searchStart = sh * 60 + sm;
+    const searchEnd = searchStart + this.searchDurationMinutes;
+
+    return this.bookings.some(b => {
+      if (b.table.id !== table.id) return false;
+      const [bsh, bsm] = b.startTime.split(':').map(Number);
+      const [beh, bem] = b.endTime.split(':').map(Number);
+      const bookingStart = bsh * 60 + bsm;
+      const bookingEnd = beh * 60 + bem;
+      // Overlap condition: startA < endB AND endA > startB
+      return searchStart < bookingEnd && searchEnd > bookingStart;
+    });
   }
 
   isRecommended(table: RestaurantTable): boolean {

@@ -2,13 +2,12 @@ package com.restaurant.backend.service;
 
 import com.restaurant.backend.dto.SearchCriteria;
 import com.restaurant.backend.dto.TableRecommendation;
-import com.restaurant.backend.model.RestaurantTable;
+import com.restaurant.backend.Entity.RestaurantTable;
 import com.restaurant.backend.repository.BookingRepository;
 import com.restaurant.backend.repository.TableRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -82,7 +81,7 @@ public class RecommendationService {
         }
 
         // 2. Zone preference (0–30 pts)
-        List<com.restaurant.backend.model.Zone> preferred = criteria.preferredZones();
+        List<com.restaurant.backend.Entity.Zone> preferred = criteria.preferredZones();
         if (preferred != null && !preferred.isEmpty() && preferred.contains(table.getZone())) {
             score += 30;
             reasons.add(table.getZone().name().replace('_', ' ') + " zone as requested");

@@ -1,7 +1,6 @@
 package com.restaurant.backend.dto;
 
-import com.restaurant.backend.model.Zone;
-import jakarta.validation.constraints.Future;
+import com.restaurant.backend.Entity.Zone;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 

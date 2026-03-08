@@ -1,4 +1,4 @@
-package com.restaurant.backend.model;
+package com.restaurant.backend.Entity;
 
 public enum Zone {
     MAIN_HALL,

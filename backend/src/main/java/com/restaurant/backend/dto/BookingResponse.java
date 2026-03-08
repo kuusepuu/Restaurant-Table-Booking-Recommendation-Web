@@ -1,7 +1,7 @@
 package com.restaurant.backend.dto;
 
-import com.restaurant.backend.model.Booking;
-import com.restaurant.backend.model.RestaurantTable;
+import com.restaurant.backend.Entity.Booking;
+import com.restaurant.backend.Entity.RestaurantTable;
 
 import java.time.LocalDate;
 import java.time.LocalTime;

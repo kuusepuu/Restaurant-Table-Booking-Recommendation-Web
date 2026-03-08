@@ -1,6 +1,6 @@
 package com.restaurant.backend.controller;
 
-import com.restaurant.backend.model.RestaurantTable;
+import com.restaurant.backend.Entity.RestaurantTable;
 import com.restaurant.backend.service.TableService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
